@@ -1,0 +1,141 @@
+<!--<div id="content-list-book" class="portadas" [ngClass]="{ portada1: p1, portada2: p2, portada3: p3 }">-->
+<div id="content-list-book" class="portadas">
+    <nav class="site-header sticky-top py-1">
+        <div class="inner">
+            <nav class="site-header navbar navbar-expand-md navbar-dark fixed-top">
+                <a><img alt="" src="assets/logo.png" /></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+                    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active2" *ngIf="student?.img && !esMaestra">
+                            <img src="/assets/27.png" width="30px" />
+                        </li>
+
+                        <li *ngIf="!esMaestra" class="nav-item">
+                            <a class="nav-link active2">Hola {{ student?.firstName }}</a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="../home">Inicio</a></li>
+                        <li *ngIf="
+            book ||
+            (!book &&
+              (adminurl === 'fichero-books' ||
+                adminurl === 'comentarios' ||
+                adminurl === 'estado-prestamos' ||
+                adminurl === 'admin-alumnos' ||
+                adminurl === 'admin-books'))
+          " class="nav-item">
+                            <a class="nav-link" routerLink="../">books</a>
+                        </li>
+                        <li *ngIf="!book && !esMaestra" class="nav-item">
+                            <a class="nav-link active">books</a>
+                        </li>
+                        <li *ngIf="book && !esMaestra" class="nav-item">
+                            <a class="nav-link" routerLink="../leidos">Ya leidos</a>
+                        </li>
+                        <li *ngIf="!book && !esMaestra" class="nav-item">
+                            <a class="nav-link" routerLink="leidos">Ya leidos</a>
+                        </li>
+
+                        <li *ngIf="
+            esMaestra &&
+            !book &&
+            adminurl !== 'fichero-books' &&
+            adminurl !== 'maestra'
+          " class="nav-item">
+                            <a class="nav-link" routerLink="../fichero-books">Fichero</a>
+                        </li>
+                        <li *ngIf="esMaestra && adminurl === 'fichero-books'" class="nav-item">
+                            <a class="nav-link active">Fichero</a>
+                        </li>
+                        <li *ngIf="esMaestra && adminurl === 'maestra'" class="nav-item">
+                            <a class="nav-link" routerLink="fichero-books">Fichero</a>
+                        </li>
+                        <li *ngIf="esMaestra && book" class="nav-item">
+                            <a class="nav-link" routerLink="../fichero-books">Fichero</a>
+                        </li>
+
+                        <li *ngIf="
+            esMaestra &&
+            !book &&
+            adminurl !== 'estado-prestamos' &&
+            adminurl !== 'maestra'
+          " class="nav-item">
+                            <a class="nav-link" routerLink="../estado-prestamos">Prestamos</a>
+                        </li>
+                        <li *ngIf="esMaestra && adminurl === 'estado-prestamos'" class="nav-item">
+                            <a class="nav-link active">Prestamos</a>
+                        </li>
+                        <li *ngIf="esMaestra && adminurl === 'maestra'" class="nav-item">
+                            <a class="nav-link" routerLink="estado-prestamos">Prestamos</a>
+                        </li>
+                        <li *ngIf="esMaestra && book" class="nav-item">
+                            <a class="nav-link" routerLink="../estado-prestamos">Prestamos</a>
+                        </li>
+
+                        <li *ngIf="
+            esMaestra &&
+            !book &&
+            adminurl !== 'comentarios' &&
+            adminurl !== 'maestra'
+          " class="nav-item">
+                            <a class="nav-link" routerLink="../comentarios">Comentarios</a>
+                        </li>
+                        <li *ngIf="esMaestra && adminurl === 'comentarios'" class="nav-item">
+                            <a class="nav-link active">Comentarios</a>
+                        </li>
+                        <li *ngIf="esMaestra && adminurl === 'maestra'" class="nav-item">
+                            <a class="nav-link" routerLink="comentarios">Comentarios</a>
+                        </li>
+                        <li *ngIf="esMaestra && book" class="nav-item">
+                            <a class="nav-link" routerLink="../comentarios">Comentarios</a>
+                        </li>
+
+                        <li *ngIf="
+            esMaestra &&
+            !book &&
+            adminurl !== 'admin-books' &&
+            adminurl !== 'maestra'
+          " class="nav-item">
+                            <a class="nav-link" routerLink="../admin-books">Biblioteca</a>
+                        </li>
+                        <li *ngIf="esMaestra && adminurl === 'admin-books'" class="nav-item">
+                            <a class="nav-link active">Biblioteca</a>
+                        </li>
+                        <li *ngIf="esMaestra && adminurl === 'maestra'" class="nav-item">
+                            <a class="nav-link" routerLink="admin-books">Biblioteca</a>
+                        </li>
+                        <li *ngIf="esMaestra && book" class="nav-item">
+                            <a class="nav-link" routerLink="../admin-books">Biblioteca</a>
+                        </li>
+
+                        <li *ngIf="
+            esMaestra &&
+            !book &&
+            adminurl !== 'admin-alumnos' &&
+            adminurl !== 'maestra'
+          " class="nav-item">
+                            <a class="nav-link" routerLink="../admin-alumnos">Alumnos</a>
+                        </li>
+                        <li *ngIf="esMaestra && adminurl === 'admin-alumnos'" class="nav-item">
+                            <a class="nav-link active">Alumnos</a>
+                        </li>
+                        <li *ngIf="esMaestra && adminurl === 'maestra'" class="nav-item">
+                            <a class="nav-link" routerLink="admin-alumnos">Alumnos</a>
+                        </li>
+                        <li *ngIf="esMaestra && book" class="nav-item">
+                            <a class="nav-link" routerLink="../admin-alumnos">Alumnos</a>
+                        </li>
+                    </ul>
+                    <input id="search" (keyup)="keyUp($event)" placeholder="Buscar..." type="text" />
+                    <!--button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+          Search
+        </button-->
+                </div>
+            </nav>
+        </div>
+    </nav>
+    <router-outlet name="lolo"></router-outlet>
+</div>

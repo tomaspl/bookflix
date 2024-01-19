@@ -1,0 +1,154 @@
+.col-sm-8 p {
+    text-align: left
+}
+
+.col-sm-8 h3 {
+    text-align: left
+}
+
+#form {
+    width: 250px;
+    margin: 0 auto;
+    height: 50px;
+}
+
+#form p {
+    text-align: center;
+}
+
+#form label {
+    font-size: 20px;
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+label {
+    color: grey;
+    font-size: 30px;
+}
+
+.clasificacion {
+    direction: rtl;
+    unicode-bidi: bidi-override;
+}
+
+label:hover,
+label:hover~label {
+    color: orange;
+}
+
+input[type="radio"]:checked~label {
+    color: orange;
+}
+
+h3 {
+    cursor: pointer;
+}
+
+img.fotoLibro {
+    float: left;
+    width: 100%;
+}
+
+.modal-body h4 {
+    color: #000;
+}
+
+@media only screen and (min-width: 400px) and (max-width: 767px) {
+    #estrellasLibro {
+        background: #141414;
+        height: 29px;
+        position: relative;
+        width: 22%;
+        margin: 0 auto 10px auto;
+        display: block;
+        float: none;
+    }
+
+    #estrellasLibro .barraEstrella {
+        position: absolute;
+        height: 29px;
+        top: 0;
+        left: 0;
+        background: orange;
+        z-index: 1;
+    }
+}
+
+@media only screen and (min-width: 100px) and (max-width: 400px) {
+    #estrellasLibro {
+        background: #141414;
+        position: relative;
+        height: 17px;
+        width: 30%;
+        margin: 0 auto 10px auto;
+        display: block;
+        float: none;
+    }
+
+    #estrellasLibro .barraEstrella {
+        position: absolute;
+        height: 17px;
+        top: 0;
+        left: 0;
+        background: orange;
+        z-index: 1;
+    }
+}
+
+@media only screen and (min-width: 1150px) and (max-width: 4000px) {
+    #estrellasLibro {
+        position: relative;
+        overflow: hidden;
+        float: left;
+        background: #141414;
+        height: 40px;
+        width: 100%;
+    }
+
+    #estrellasLibro .barraEstrella {
+        position: absolute;
+        height: 40px;
+        top: 0;
+        left: 0;
+        background: orange;
+        z-index: 1;
+    }
+}
+
+@media only screen and (min-width: 767px) and (max-width: 1150px) {
+    #estrellasLibro {
+        position: relative;
+        overflow: hidden;
+        float: left;
+        background: #141414;
+        height: 30px;
+        width: 100%;
+    }
+
+    #estrellasLibro .barraEstrella {
+        position: absolute;
+        height: 30px;
+        top: 0;
+        left: 0;
+        background: orange;
+        z-index: 1;
+    }
+}
+
+.masthead-brand {
+    margin-left: 30px;
+}
+
+#content-list-book {
+    height: 100%;
+    width: 100%;
+    background-repeat: repeat;
+    background-size: auto;
+    background-size: 100%;
+    float: left;
+    background-repeat: no-repeat;
+    background-position-y: -200px;
+}

@@ -1,0 +1,136 @@
+h3 {
+    cursor: pointer;
+}
+
+.profiles-gate-container li.profile {
+    width: 10vw;
+    max-width: 200px;
+    min-width: 84px;
+    margin: 0 2vw 0 0;
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+}
+
+.list-profiles .avatar-wrapper {
+    position: relative
+}
+
+.profile-icon {
+    height: 10vw;
+    width: 10vw;
+    max-height: 200px;
+    max-width: 200px;
+    min-height: 84px;
+    min-width: 84px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    position: relative;
+    text-decoration: none;
+    border: .3em solid rgba(0, 0, 0, .4);
+    background-repeat: no-repeat;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-color: #333;
+}
+
+.profiles-gate-container .profile-name {
+    line-height: 1.2em;
+    min-height: 2.4em;
+    color: grey;
+    display: block;
+    text-align: center;
+    font-size: 1.3vw;
+    margin: .8em 0;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    text-decoration: none;
+}
+
+.profiles-gate-container li.profile:not(:last-child) {
+    margin: 0 2vw 0 0;
+}
+
+.profiles-gate-container li a.focused .profile-icon,
+.profiles-gate-container li a.hover span,
+.profiles-gate-container li a:focus .profile-icon,
+.profiles-gate-container li a:hover .profile-icon {
+    border-color: #e5e5e5;
+    cursor: pointer;
+    color: #e5e5e5;
+    text-decoration: none;
+}
+
+.profile-gate-label {
+    font-size: 36px;
+    margin: 100px 0 30px;
+}
+
+.ct:hover span {
+    color: #fff;
+    text-decoration: none;
+}
+
+.ct:hover a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.profile-icon img {
+    width: 100%;
+    float: left;
+}
+
+.mastfoot {
+    position: relative;
+}
+
+ul {
+    padding: 0
+}
+
+.masthead {
+    margin: -100px 30px 0;
+}
+
+.choose-profile {
+    margin: 0 50px;
+}
+
+@media only screen and (min-width: 100px) and (max-width: 400px) {
+
+
+    .profile-gate-label {
+        font-size: 36px;
+        margin: 30px 0 30px;
+    }
+}
+
+@media only screen and (min-width: 100px) and (max-width: 900px) {
+    .masthead {
+        margin: 0 30px;
+    }
+
+    .choose-profile {
+        margin: 0
+    }
+
+    .inner {
+        padding: 0
+    }
+
+    .profiles-gate-container .profile-name {
+        font-size: 6.3vw
+    }
+}
+
+.modal-body label {
+    color: #000;
+}
+
+.error {
+    color: red;
+}

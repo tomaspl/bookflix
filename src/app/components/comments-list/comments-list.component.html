@@ -1,0 +1,10 @@
+<ul>
+    <li class="item" *ngFor="let comment of (comments$ | async)">
+        <div class="s1"><img width="30px" src="assets/{{comment.img}}.png">
+        </div>
+        <div class="s2">
+            <h3>{{comment.student}}</h3>
+            <p>{{comment.comment}}</p>
+        </div>
+    </li>
+</ul>

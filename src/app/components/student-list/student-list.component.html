@@ -1,0 +1,34 @@
+<div class="masthead clearfix">
+    <div class="inner">
+        <h3 class="masthead-brand" routerLink="home">
+            <img src="https://firebasestorage.googleapis.com/v0/b/bookflix-4230d.appspot.com/o/logo.png?alt=media&token=c9ef09e6-0580-4213-a182-0bf5d7845801"
+                alt="" />
+        </h3>
+        <router-outlet name="lolo"></router-outlet>
+    </div>
+</div>
+<div class="profiles-gate-container">
+    <div class="list-profiles">
+        <div class="profile-gate-label">
+            ¿Qui&eacute;n est&aacute; leyendo ahora?
+        </div>
+        <ul class="choose-profile">
+            <li class="profile" *ngFor="let student of students$ | async">
+                <div class="ct">
+                    <button (click)="selectStudent(student)" class="profile-link">
+                        <div class="avatar-wrapper">
+                            <div class="profile-icon">
+                                <img src="https://firebasestorage.googleapis.com/v0/b/bookflix-4230d.appspot.com/o/{{
+                      student.img
+                    }}.png?alt=media&token=a02ff541-63b1-4880-814a-d01de89e3b99" alt="" />
+                            </div>
+                        </div>
+                        <span class="profile-name">{{ student.firstName }}</span>
+                    </button>
+                    <div class="profile-children"></div>
+                </div>
+            </li>
+        </ul>
+
+    </div>
+</div>

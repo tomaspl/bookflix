@@ -1,0 +1,64 @@
+<div class="position-relative overflow-hidden pt-5 mt-4 text-center">
+    <div class="destacado" *ngIf="p1">
+        <h1 class="font-white">Biblioteca virtual para el aula</h1>
+        <p class="font-white">
+            Con esta plataforma podran ver que libros estan disponibles para leer,
+            reservarlos, comentarlos y calificarlos. Así podrán saber que opinan
+            quienes ya lo leyeron y compartir tu opinión... ¡qué empiece la lectura!
+        </p>
+        <!-- <a class="btn btn-secondary" routerLink="batu1">Ver más</a> -->
+    </div>
+    <div class="lolomoRow lolomoRow_title_card">
+        <div class="rowContainer rowContainer_title_card">
+            <div class="ptrack-container">
+                <div class="rowContent slider-hover-trigger-layer">
+                    <div class="slider">
+                        <div class="sliderMask showPeek">
+                            <div class="sliderContent row-with-x-columns">
+                                <h2 class="float-left w-100 text-left" id="booksEncontrados"
+                                    *ngIf="activeSearchBook && bookList.length > 0">
+                                    books encontrados con la/s palabra/s: '{{ keyword }}'
+                                </h2>
+                                <h2 class="float-left w-100 text-left" id="booksEncontrados"
+                                    *ngIf="activeSearchBook && bookList.length === 0">
+                                    No hay resultados para la busqueda con la/s palabra/s: '{{
+                                    keyword
+                                    }}'
+                                </h2>
+                                <div class="slider-item" *ngFor="let book of bookList">
+                                    <a routerLink="{{ book.url }}">
+                                        <div class="title-card-container">
+                                            <div class="smallTitleCard lockup title_card sliderRefocus">
+                                                <div class="ptrack-content">
+                                                    <div class="video-artwork">
+                                                        <img style="height:350px; width:100%" [src]="book.picture"
+                                                            alt="" />
+                                                        <p *ngIf="book.hasit" class="available">
+                                                            book rented
+                                                        </p>
+                                                        <div class="contEstrellas">
+                                                            <p [ngStyle]="{ width: book.averageX + '%' }"
+                                                                class="barraEstrella">
+                                                            </p>
+                                                            <img style="position: absolute; width: 100%; top:0; left:0;z-index: 2;"
+                                                                src="https://firebasestorage.googleapis.com/v0/b/bookflix-4230d.appspot.com/o/estrellas.png?alt=media&token=9235019a-b20e-4ac0-bd59-b240acf7575d"
+                                                                alt="" />
+                                                        </div>
+                                                        <p class="w-100 float-left font-weight-bold"
+                                                            style="height:45px; line-height:14px;">
+                                                            {{ book.title }}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

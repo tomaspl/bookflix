@@ -1,0 +1,43 @@
+ul {
+    list-style: none;
+    float: left;
+    width: 100%;
+    margin: 25px 0 0 0;
+    padding: 0;
+}
+
+ul li {
+    border-bottom: 1px solid #e5e5e5;
+    float: left;
+    width: 100%;
+    padding: 10px 0;
+}
+
+ul li .s1 {
+    width: 10%;
+    float: left;
+}
+
+ul li .s1 img {
+    width: 100%;
+    float: left;
+}
+
+ul li .s2 {
+    float: right;
+    width: 88%
+}
+
+ul li .s2 p {
+    float: left;
+    width: 100%;
+    text-align: left;
+    word-break: break-all
+}
+
+ul li .s2 h3 {
+    float: left;
+    width: 100%;
+    text-align: left;
+    margin: 0
+}

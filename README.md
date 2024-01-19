@@ -19,19 +19,19 @@ Currently, the project is undergoing migration to a more modern Angular version,
 
 ## Migration state:
 
-- <input type="checkbox" checked/> **Connection with Firebase Realtime Database**
-- <input type="checkbox" checked/> **Initial page with a list of students**
-- <input type="checkbox" checked/> **Home page with list of books**
-- <input type="checkbox" checked/> **Book detail page**
-- <input type="checkbox" checked/> **Rating functionality and calculation of the average of votes**
-- <input type="checkbox" checked/> **Renting functionality and validation to avoid multiple rentals until the previous one is returned**
-- <input type="checkbox" checked/> **Comments module on the book page**
-- <input type="checkbox" /> **Search book functionality**
-- <input type="checkbox" /> **Style adjustments on the students list page**
-- <input type="checkbox" /> **Style adjustments on the books list and book detail pages**
-- <input type="checkbox" /> **Admin page to mark the books returned by students**
-- <input type="checkbox" /> **Refactoring**
-- <input type="checkbox" /> **Typings reviews**
+- [X] **Connection with Firebase Realtime Database**
+- [X] **Initial page with a list of students**
+- [X] **Home page with list of books**
+- [X] **Book detail page**
+- [X] **Rating functionality and calculation of the average of votes**
+- [X] **Renting functionality and validation to avoid multiple rentals until the previous one is returned**
+- [X] **Comments module on the book page**
+- [ ] **Search book functionality**
+- [ ] **Style adjustments on the students list page**
+- [ ] **Style adjustments on the books list and book detail pages**
+- [ ] **Admin page to mark the books returned by students**
+- [ ] **Refactoring**
+- [ ] **Typings reviews**
 
 
 

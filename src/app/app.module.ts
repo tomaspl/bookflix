@@ -12,6 +12,7 @@ import { MenuComponent } from './components/menu/menu.component';
 import { BookComponent } from './components/book/book.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommentsListComponent } from './components/comments-list/comments-list.component';
+import { StarsRatingComponent } from './components/stars-rating/stars-rating.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { CommentsListComponent } from './components/comments-list/comments-list.
     BookListComponent,
     MenuComponent,
     BookComponent,
-    CommentsListComponent
+    CommentsListComponent,
+    StarsRatingComponent
   ],
   imports: [
     BrowserModule,

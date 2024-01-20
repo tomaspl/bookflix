@@ -4,12 +4,7 @@
     <div class="row m-0">
       <div class="col-sm-5"></div>
       <div class="col-sm-2">
-        <div id="estrellasLibro">
-          <p [ngStyle]="{ width: book.averageX + '%' }" class="barraEstrella"></p>
-          <img style="position: absolute; width: 100%; top:0; left:0;z-index: 2;"
-            src="https://firebasestorage.googleapis.com/v0/b/bookflix-4230d.appspot.com/o/estrellas.png?alt=media&token=9235019a-b20e-4ac0-bd59-b240acf7575d"
-            alt="" />
-        </div>
+        <app-stars-rating [rating]="book.average??0"></app-stars-rating>
       </div>
     </div>
   </div>
@@ -75,7 +70,7 @@
               </button>
             </fieldset>
           </form>
-          <app-comments-list [bookKey]="book?.url"></app-comments-list>
+          <app-comments-list [bookKey]="book.url"></app-comments-list>
         </div>
       </div>
     </div>

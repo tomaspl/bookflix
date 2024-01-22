@@ -26,36 +26,38 @@ Currently, the project is undergoing migration to a more modern Angular version,
 - [X] **Rating functionality and calculation of the average of votes**
 - [X] **Renting functionality and validation to avoid multiple rentals until the previous one is returned**
 - [X] **Comments module on the book page**
-- [ ] **Search book functionality**
-- [ ] **Style adjustments on the students list page**
+- [X] **Search book functionality**
+- [X] **Style adjustments on the students list page**
 - [ ] **Style adjustments on the books list and book detail pages**
 - [ ] **Admin page to mark the books returned by students**
 - [ ] **Refactoring**
 - [ ] **Typings reviews**
 
 
-
-
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
 ## Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
+## Upload to Firebase
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```sh
+$ ng build --prod
+$ sudo firebase login
+$ sudo firebase init
+```
 
-## Running end-to-end tests
+- What do you want to use as your public directory? dist
+- Configure as a single-page app (rewrite all urls to /index.html)? Yes
+- File dist/index.html already exists. Overwrite? No
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+```sh
+$ sudo firebase deploy
+```
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Dev link:
+https://dev-bookflix.web.app/

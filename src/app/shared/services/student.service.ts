@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase, AngularFireList } from '@angular/fire/compat/database';
-import { BehaviorSubject, Observable, Subject, map, of } from 'rxjs';
+import { AngularFireDatabase } from '@angular/fire/compat/database';
+import { BehaviorSubject, Observable, map } from 'rxjs';
 import { Student } from '../models/Student';
 import { ActivatedRoute } from '@angular/router';
 

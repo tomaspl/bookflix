@@ -1,27 +1,35 @@
 <div class="star-container">
     <ng-container *ngFor="let star of stars; let i = index">
-        <svg class="star" *ngIf="i+1 <= filledStars" [class.full]="i+1 <= filledStars"
+        <svg class="star" *ngIf="i+1 <= filledStars; else partialStar" [class.full]="i+1 <= filledStars"
             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
             <path d="M12 2 L14.4 9.3 L22 9.3 L16.8 14.1 L19.2 21.3 L12 17.5 L4.8 21.3 L7.2 14.1 L2 9.3 L9.6 9.3 L12 2"
                 stroke="white"></path>
         </svg>
-        <svg class="star" *ngIf="i === filledStars && filledLastStarPercentage > 0" xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24">
-            <defs>
-                <clipPath id="clip">
-                    <rect [attr.width]="filledLastStarPercentage + '%'" height="100%" />
-                </clipPath>
-            </defs>
+        <ng-template #partialStar>
+            <svg class="star" *ngIf="i === filledStars && filledLastStarPercentage > 0;else emptyStar"
+                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <defs>
+                    <clipPath id="clip">
+                        <rect [attr.width]="filledLastStarPercentage + '%'" height="100%" />
+                    </clipPath>
+                </defs>
 
-            <path d="M12 2 L14.4 9.3 L22 9.3 L16.8 14.1 L19.2 21.3 L12 17.5 L4.8 21.3 L7.2 14.1 L2 9.3 L9.6 9.3 L12 2"
-                stroke="white" clip-path="url(#clip)"></path>
-            <path d="M12 2 L14.4 9.3 L22 9.3 L16.8 14.1 L19.2 21.3 L12 17.5 L4.8 21.3 L7.2 14.1 L2 9.3 L9.6 9.3 L12 2"
-                stroke="white" class="empty-half"></path>
-        </svg>
-        <svg *ngIf="filledStars === 0 || i >= filledStars" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-            class="empty-star">
-            <path d="M12 2 L14.4 9.3 L22 9.3 L16.8 14.1 L19.2 21.3 L12 17.5 L4.8 21.3 L7.2 14.1 L2 9.3 L9.6 9.3 L12 2"
-                stroke="white" stroke-width=".5"></path>
-        </svg>
+                <path
+                    d="M12 2 L14.4 9.3 L22 9.3 L16.8 14.1 L19.2 21.3 L12 17.5 L4.8 21.3 L7.2 14.1 L2 9.3 L9.6 9.3 L12 2"
+                    stroke="white" clip-path="url(#clip)"></path>
+                <path
+                    d="M12 2 L14.4 9.3 L22 9.3 L16.8 14.1 L19.2 21.3 L12 17.5 L4.8 21.3 L7.2 14.1 L2 9.3 L9.6 9.3 L12 2"
+                    stroke="white" class="empty-half"></path>
+            </svg>
+        </ng-template>
+
+        <ng-template #emptyStar>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="empty-star">
+                <path
+                    d="M12 2 L14.4 9.3 L22 9.3 L16.8 14.1 L19.2 21.3 L12 17.5 L4.8 21.3 L7.2 14.1 L2 9.3 L9.6 9.3 L12 2"
+                    stroke="white" stroke-width=".5"></path>
+            </svg>
+        </ng-template>
+
     </ng-container>
 </div>

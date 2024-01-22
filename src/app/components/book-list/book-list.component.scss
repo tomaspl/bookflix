@@ -1,72 +1,5 @@
-@import '/src/custom-bootstrap';
-
-
 h3 {
     cursor: pointer;
-}
-
-.lolomoRow {
-    position: relative;
-    width: 100%;
-    float: left;
-    margin: 2% 0 0 0;
-
-    background: rgba(20, 20, 20, 0);
-    background: -moz-linear-gradient(top,
-            rgba(20, 20, 20, 0) 0%,
-            rgba(20, 20, 20, 1) 2%,
-            rgba(20, 20, 20, 1) 100%);
-    background: -webkit-gradient(left top,
-            left bottom,
-            color-stop(0%, rgba(20, 20, 20, 0)),
-            color-stop(2%, rgba(20, 20, 20, 1)),
-            color-stop(100%, rgba(20, 20, 20, 1)));
-    background: -webkit-linear-gradient(top,
-            rgba(20, 20, 20, 0) 0%,
-            rgba(20, 20, 20, 1) 2%,
-            rgba(20, 20, 20, 1) 100%);
-    background: -o-linear-gradient(top,
-            rgba(20, 20, 20, 0) 0%,
-            rgba(20, 20, 20, 1) 2%,
-            rgba(20, 20, 20, 1) 100%);
-    background: -ms-linear-gradient(top,
-            rgba(20, 20, 20, 0) 0%,
-            rgba(20, 20, 20, 1) 2%,
-            rgba(20, 20, 20, 1) 100%);
-    background: linear-gradient(to bottom,
-            rgba(20, 20, 20, 0) 0%,
-            rgba(20, 20, 20, 1) 2%,
-            rgba(20, 20, 20, 1) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#141414', endColorstr='#141414', GradientType=0);
-}
-
-.rowContainer {
-    -webkit-transition: -webkit-transform 0.54s cubic-bezier(0.5, 0, 0.1, 1) 0s;
-    transition: -webkit-transform 0.54s cubic-bezier(0.5, 0, 0.1, 1) 0s;
-    -o-transition: -o-transform 0.54s cubic-bezier(0.5, 0, 0.1, 1) 0s;
-    -moz-transition: transform 0.54s cubic-bezier(0.5, 0, 0.1, 1) 0s,
-        -moz-transform 0.54s cubic-bezier(0.5, 0, 0.1, 1) 0s;
-    transition: transform 0.54s cubic-bezier(0.5, 0, 0.1, 1) 0s;
-    transition: transform 0.54s cubic-bezier(0.5, 0, 0.1, 1) 0s,
-        -webkit-transform 0.54s cubic-bezier(0.5, 0, 0.1, 1) 0s,
-        -moz-transform 0.54s cubic-bezier(0.5, 0, 0.1, 1) 0s,
-        -o-transform 0.54s cubic-bezier(0.5, 0, 0.1, 1) 0s;
-}
-
-.barraEstrella {
-    position: absolute;
-    height: 29px;
-    top: 0;
-    left: 0;
-    background: orange;
-    z-index: 1;
-}
-
-.rowContainer .rowContent {
-    padding: 0;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
 }
 
 .slider {
@@ -75,27 +8,9 @@ h3 {
     padding: 0 4%;
 }
 
-.rowContainer .rowContent .slider {
-    z-index: 2;
-}
 
 .slider .sliderMask.showPeek {
     overflow-x: visible;
-}
-
-.rowContainer .rowContent .slider .row-with-x-columns .slider-item {
-    height: auto;
-    width: 100%
-}
-
-.contEstrellas {
-    position: relative;
-    overflow: hidden;
-    float: left;
-    width: 64%;
-    background: #141414;
-    height: 48px;
-    margin: 10px 0 0 20%;
 }
 
 .slider .sliderMask .sliderContent .slider-item {
@@ -110,31 +25,8 @@ h3 {
     position: relative;
 }
 
-.mastfoot,
 .cover-container {
     width: 100%;
-}
-
-.masthead-brand {
-    margin-left: 30px;
-}
-
-.masthead {
-    background-image: linear-gradient(to bottom,
-            rgb(45, 37, 37),
-            rgba(255, 0, 0, 0));
-    padding-bottom: 5%;
-}
-
-#content-list-book {
-    height: 100%;
-    width: 100%;
-    background-repeat: repeat;
-    background-size: auto;
-    background-size: 100%;
-    float: left;
-    background-repeat: no-repeat;
-    background-position-y: -200px;
 }
 
 .portada1 {
@@ -146,15 +38,7 @@ h3 {
 .portada1-sub {
     background-size: cover;
     background-position-y: 0px;
-    background-image: linear-gradient(180deg, rgba(20, 20, 20, 1) 10%, transparent)
-}
-
-.portada2 {
-    background: url(https://firebasestorage.googleapis.com/v0/b/bookflix-4230d.appspot.com/o/portada2.png?alt=media&token=4be43696-6bc0-4d0d-963d-3b6d5c2a332d);
-}
-
-.portada3 {
-    background: url(https://firebasestorage.googleapis.com/v0/b/bookflix-4230d.appspot.com/o/portada3.png?alt=media&token=de4e7851-89cc-4931-bf07-37ce99ece20c);
+    background-image: linear-gradient(180deg, rgba(20, 20, 20, 1) 10%, transparent);
 }
 
 .destacado {
@@ -200,11 +84,6 @@ h3 {
 }
 
 @media only screen and (min-width: 100px) and (max-width: 900px) {
-    .masthead {
-        margin: 0 30px;
-        background: none;
-    }
-
     .choose-profile {
         margin: 0;
     }
@@ -215,15 +94,6 @@ h3 {
 
     .profiles-gate-container .profile-name {
         font-size: 6.3vw;
-    }
-
-    .masthead-brand img {
-        width: 60%;
-        margin: 7px 0;
-    }
-
-    .masthead-brand {
-        margin: 0;
     }
 
     .destacado {
@@ -237,15 +107,10 @@ h3 {
 
 .available {
     position: absolute;
-
     bottom: 50%;
-
     z-index: 11111;
-
     text-align: center;
-
     width: 100%;
-
     background: red;
     box-shadow: 0 2px 30px #000;
 }

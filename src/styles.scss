@@ -48,7 +48,6 @@
 /* Sidebar navigation */
 .nav-sidebar {
     margin-right: -21px;
-    /* 20px padding + 1px border */
     margin-bottom: 20px;
     margin-left: -20px;
 }
@@ -106,11 +105,6 @@
     border-radius: 50%;
 }
 
-/*
- * Globals
- */
-
-/* Links */
 a,
 a:focus,
 a:hover {
@@ -123,7 +117,6 @@ a:hover {
 .btn-default:focus {
     color: #333;
     text-shadow: none;
-    /* Prevent inheritance from `body` */
     background-color: #fff;
     border: 1px solid #fff;
 }
@@ -151,8 +144,6 @@ body {
     height: 100%;
     /* For at least Firefox */
     min-height: 100%;
-    -webkit-box-shadow: inset -33px 103px 75px rgba(0, 0, 0, 0.5);
-    box-shadow: inset -33px 103px 75px rgba(0, 0, 0, 0.5);
 }
 
 @media only screen and (min-width: 100px) and (max-width: 768px) {
@@ -167,7 +158,6 @@ body {
 }
 
 .site-wrapper-inner {
-    /*display: table-cell;*/
     vertical-align: top;
 }
 
@@ -176,22 +166,12 @@ body {
     margin-left: auto;
 }
 
-/* Padding for spacing */
 .inner {
     padding: 15px 30px;
 }
 
-/*
- * Header
- */
 .masthead-brand {
     margin-bottom: 0px;
-}
-
-.masthead-brand img {
-    width: 60%;
-    float: left;
-    margin: 7px 0;
 }
 
 .masthead-nav>li {
@@ -208,7 +188,6 @@ body {
     font-size: 16px;
     font-weight: bold;
     color: #fff;
-    /* IE8 proofing */
     color: rgba(255, 255, 255, 0.75);
     border-bottom: 2px solid transparent;
 }
@@ -237,10 +216,6 @@ body {
     }
 }
 
-/*
- * Cover
- */
-
 .cover {
     padding: 0 20px;
 }
@@ -250,23 +225,14 @@ body {
     font-weight: bold;
 }
 
-/*
- * Footer
- */
-
 .mastfoot {
     color: #999;
     /* IE8 proofing */
     color: rgba(255, 255, 255, 0.5);
 }
 
-/*
- * Affix and center
- */
-
 @media (min-width: 768px) {
 
-    /* Pull out the header and footer */
     .masthead {
         float: left;
         top: 0;
@@ -278,31 +244,18 @@ body {
         bottom: 0;
     }
 
-    /* Start the vertical centering */
     .site-wrapper-inner {
         vertical-align: middle;
     }
 
-    /* Handle the widths */
     .masthead,
     .mastfoot,
     .cover-container {
         width: 100%;
-        /* Must be percentage or pixels for horizontal alignment */
     }
 }
 
-@media (min-width: 992px) {
 
-    .masthead,
-    .mastfoot,
-    .cover-container {
-        /*  width: 700px;*/
-    }
-}
-
-/*.cover-container{width: 1200px;}
-.masthead, .mastfoot, .cover-container{width:1000px;position: relative}*/
 h4 span {
     color: #000;
 }
@@ -363,15 +316,7 @@ h6,
 
 @media (min-width: 768px) {
     .site-header {
-        height: 120px;
-        background-image: linear-gradient(180deg,
-                rgb(20, 20, 20) 50% 0,
-                rgba(255, 0, 0, 0));
+        height: 70px;
+        background-image: linear-gradient(180deg, rgba(0, 0, 0, .7) 10%, transparent)
     }
-
-    .site-header a {
-        /*margin: -50px 0 0 0;*/
-    }
-
-    .site-header #navbarCollapse #search {}
 }

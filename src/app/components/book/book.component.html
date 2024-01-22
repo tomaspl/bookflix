@@ -1,6 +1,6 @@
-<div *ngIf="book" id="content-list-book">
-  <h2>{{ book.title }}</h2>
-  <div style="width: 100%; float:left;">
+<div *ngIf="book" class="content-list-book mt-5">
+  <h2 class="my-3">{{ book.title }}</h2>
+  <div class="w-100 float-start">
     <div class="row m-0">
       <div class="col-sm-5"></div>
       <div class="col-sm-2">
@@ -9,67 +9,78 @@
     </div>
   </div>
   <div class="container">
-    <div style="width:100%;float:left;">
+    <div class="w-100 float-start">
       <div class="row m-0">
         <div class="col-sm-4">
           <img class="fotoLibro" [src]="book.picture" />
           <div class="mb-2 mt-2 w-100 float-left" *ngIf="book?.youtubeLink">
             <button data-toggle="modal" data-target="#videoModal" class="btn btn-danger m-auto" (click)="showVideo()">
-              Ver BookTriller
+              Watch BookTriller
               <i class="bi bi-play-btn-fill"></i>
             </button>
           </div>
         </div>
         <div class="col-sm-8">
-          <h3>Reseña</h3>
-          <p>{{ book.description }}</p>
-          <h3>Autor</h3>
-          <p>{{ book.author }}</p>
-          <h3>Ilustrador</h3>
-          <p>{{ book.illustrator ? book.illustrator : "" }}</p>
-          <h3>Editorial</h3>
-          <p>{{ book.publishedBy }}</p>
-          <h3 *ngIf="!isTeacher">Mi calificaci&oacute;n</h3>
-          <p *ngIf="!isTeacher" class="clasificacion mb-0">
-            <input id="radio1" type="radio" name="estrellas" [checked]="currentStars == '5'" />
+          <ng-container *ngIf="book.description">
+            <h3>Description</h3>
+            <p>{{ book.description }}</p>
+          </ng-container>
+          <ng-container *ngIf="book.illustrator">
+            <h3>Author</h3>
+            <p>{{ book.author}}</p>
+          </ng-container>
+          <ng-container *ngIf="book.illustrator">
+            <h3>Ilustrador</h3>
+            <p>{{ book.illustrator}}</p>
+          </ng-container>
+          <ng-container *ngIf="book.publishedBy">
+            <h3>Published by</h3>
+            <p>{{ book.publishedBy}}</p>
+          </ng-container>
+          <h3>My vote</h3>
+          <p class="clasificacion mb-0">
+            <input id="radio1" type="radio" name="estrellas" [checked]="(currentStars$ | async) == '5'" />
             <label for="radio1" (click)="
                   saveRating(5, book.url)
                 ">★</label>
-            <input id="radio2" type="radio" name="estrellas" [checked]="currentStars == '4'" />
+            <input id="radio2" type="radio" name="estrellas" [checked]="(currentStars$ | async) == '4'" />
             <label for="radio2" (click)="
                   saveRating(4, book.url)
                 ">★</label>
-            <input id="radio3" type="radio" name="estrellas" [checked]="currentStars == '3'" />
+            <input id="radio3" type="radio" name="estrellas" [checked]="(currentStars$ | async) == '3'" />
             <label for="radio3" (click)="
                   saveRating(3, book.url)
                 ">★</label>
-            <input id="radio4" type="radio" name="estrellas" [checked]="currentStars == '2'" />
+            <input id="radio4" type="radio" name="estrellas" [checked]="(currentStars$ | async) == '2'" />
             <label for="radio4" (click)="
                   saveRating(2, book.url)
                 ">★</label>
-            <input id="radio5" type="radio" name="estrellas" [checked]="currentStars == '1'" />
+            <input id="radio5" type="radio" name="estrellas" [checked]="(currentStars$ | async) == '1'" />
             <label for="radio5" (click)="
                   saveRating(1, book.url)
                 ">★</label>
           </p>
           <div class="w-100 mb-4 float-left">
-            <button *ngIf="!isTeacher" data-bs-toggle="modal" type="button" data-bs-target="#exampleModal"
+            <button data-bs-toggle="modal" type="button" data-bs-target="#exampleModal"
               class="btn btn-danger float-left">
-              Retirar
+              Check out
             </button>
 
           </div>
-          <h3>Comentarios</h3>
-          <form *ngIf="!isTeacher" [formGroup]="form" autocomplete="off" class="lesson-form">
+          <h3>Comments</h3>
+          <form [formGroup]="form" autocomplete="off" class="lesson-form">
             <fieldset>
-              <input type="hidden" name="student" formControlName="student" [value]="student" />
+              <input type="hidden" name="student" formControlName="student"
+                [value]="(student$ | async)?.firstName + ' ' + (student$ | async)?.lastName" />
+              <input type="hidden" name="img" formControlName="img" [value]="(student$ | async)?.img" />
               <textarea class="form-control" name="comment" formControlName="comment" cols="30" rows="5"></textarea>
               <button [disabled]="!form.valid" (click)="saveComment()" class="btn btn-danger w-100"
                 style="margin: 10px auto; display: block; float:none;">
-                Enviar
+                Send
               </button>
             </fieldset>
           </form>
+
           <app-comments-list [bookKey]="book.url"></app-comments-list>
         </div>
       </div>
@@ -81,152 +92,36 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <p class="text-dark" *ngIf="book?.hasit && !currentStudent?.bookId">
-              No puede retirar el libro porque ya lo tiene alguien
+            <p class="text-dark" *ngIf="book?.hasit && !(student$|async)?.bookId">
+              You can't pick up the book because someone already has it.
             </p>
-            <p class="text-dark" *ngIf="currentStudent.bookId && book?.hasit !== currentStudent.key">
-              No puede retirar el libro porque no devolvió el libro anterior
+            <p class="text-dark" *ngIf="(student$|async)?.bookId && book?.hasit !== (student$|async)?.key">
+              You cannot pick up the book because you did not return the previous book
             </p>
-            <p class="text-dark" *ngIf="!currentStudent.bookId && !book?.hasit">
+            <p class="text-dark" *ngIf="!(student$|async)?.bookId && !book?.hasit">
               ¿Está seguro de reservar el libro {{ book.title }}?
+              Are you sure about pre-ordering book {{ book.title }}?
             </p>
-            <p class="text-dark" *ngIf="book?.hasit === currentStudent?.key">
-              El libro fue reservado exitosamente
+            <p class="text-dark" *ngIf="book?.hasit === (student$|async)?.key">
+              The book was successfully reserved
             </p>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-              Cerrar
+              Close
             </button>
             <button type="button" (click)="
                 retirar(
                   book.url,
-                  currentStudent.key,
-                  currentStudent.firstName,
-                  currentStudent.lastName,
                   book.title,
                   book.picture
                 )
-              " *ngIf="!taken && !student?.bookId && !book?.hasit" data-dismiss="modal" class="btn btn-danger">
-              Retirar
+              " *ngIf="!taken && !(student$|async)?.bookId && !book?.hasit" data-dismiss="modal"
+              class="btn btn-danger">
+              Check out
             </button>
           </div>
-        </div>
-      </div>
-    </div>
-    <!-- Modal -->
-    <!--div
-      class="modal fade"
-      id="exampleModal"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button
-              type="button"
-              class="close"
-              data-dismiss="modal"
-              aria-label="Close"
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <p class="text-dark" *ngIf="libro?.loTiene && !alumno?.libro">
-              No puede retirar el libro porque ya lo tiene alguien
-            </p>
-            <p
-              class="text-dark"
-              *ngIf="alumno?.libro && libro?.loTiene !== alumno?.$key"
-            >
-              No puede retirar el libro porque no devolvió el libro anterior
-            </p>
-            <p class="text-dark" *ngIf="!alumno?.libro && !libro?.loTiene">
-              ¿Está seguro de reservar el libro {{ libro?.title }}?
-            </p>
-            <p class="text-dark" *ngIf="libro?.loTiene === alumno?.$key">
-              El libro fue reservado exitosamente
-            </p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">
-              Cerrar
-            </button>
-            <button
-              type="button"
-              (click)="
-                retirar(
-                  libro?.$key,
-                  alumno?.$key,
-                  alumno?.nombre,
-                  alumno?.apellido,
-                  libro?.title,
-                  libro?.foto
-                )
-              "
-              *ngIf="!retirado && !alumno?.libro && !libro?.loTiene"
-              data-dismiss="modal"
-              class="btn btn-danger"
-            >
-              Retirar
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  
-    <div
-    class="modal fade"
-    id="videoModal"
-    tabindex="-1"
-    role="dialog"
-    aria-labelledby="videoModalLabel"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button
-            type="button"
-            class="close"
-            data-dismiss="modal"
-            aria-label="Close"
-            (click)="hideVideo()"
-          >
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <iframe *ngIf="video" width="100%" height="315" [src]="linkYoutube" allowfullscreen></iframe>
-        </div>
-        <div class="modal-footer">
-          <button type="button" (click)="hideVideo()" class="btn btn-secondary" data-dismiss="modal">
-            Cerrar
-          </button>
-          <button
-            type="button"
-            (click)="
-              retirar(
-                libro?.$key,
-                alumno?.$key,
-                alumno?.nombre,
-                alumno?.apellido,
-                libro?.title,
-                libro?.foto
-              )
-            "
-            *ngIf="!retirado && !alumno?.libro && !libro?.loTiene"
-            data-dismiss="modal"
-            class="btn btn-danger"
-          >
-            Retirar
-          </button>
         </div>
       </div>
     </div>
   </div>
-  </div-->

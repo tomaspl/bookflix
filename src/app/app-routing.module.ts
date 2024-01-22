@@ -7,22 +7,19 @@ import { BookComponent } from './components/book/book.component';
 
 export const routes: Routes = [
   {
-    path: 'home',
+    path: '',
     component: StudentListComponent,
     pathMatch: 'full'
   },
   {
-    path: 'home/students/:id',
+    path: 'students/:id',
     component: MenuComponent,
     children: [
 
       {
         path: '',
         component: BookListComponent,
-        outlet: 'lolo',
-        /*resolve: {
-          alumno: AlumnoResolver
-        },*/
+        outlet: 'content',
         pathMatch: 'full'
 
       }
@@ -30,17 +27,13 @@ export const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'home/students/:id/:book',
+    path: 'students/:id/:book',
     component: MenuComponent,
     children: [{
       path: '',
       component: BookComponent,
-      outlet: 'lolo',
+      outlet: 'content',
       pathMatch: 'full'
-      /*resolve: {
-        alumno: AlumnoResolver
-      },*/
-
     },]
   }
 ];

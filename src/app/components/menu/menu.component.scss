@@ -6,6 +6,13 @@
     border-left: none;
     border-right: none;
     border-top: none;
+    padding: 8px 0;
+
+    &:active,
+    &:focus,
+    &:focus-visible {
+        outline: 0;
+    }
 }
 
 ul {
@@ -32,16 +39,6 @@ ul {
 
 .navbar a img {
     width: 60%;
-}
-
-@media (min-width: 768px) {
-    .navbar a img {
-        margin-top: -50px;
-    }
-
-    #navbarCollapse {
-        margin: -50px 0 0 0
-    }
 }
 
 @media (max-width: 768px) {

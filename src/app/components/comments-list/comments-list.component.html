@@ -1,6 +1,7 @@
 <ul>
-    <li class="item" *ngFor="let comment of (comments$ | async)">
-        <div class="s1"><img width="30px" src="assets/{{comment.img}}.png">
+    <li class="item" *ngFor="let comment of (comments$ | async) as commentData">
+        <div class="s1" *ngIf="comment.img">
+            <img width="30px" src="/assets/{{ comment.img }}.png">
         </div>
         <div class="s2">
             <h3>{{comment.student}}</h3>

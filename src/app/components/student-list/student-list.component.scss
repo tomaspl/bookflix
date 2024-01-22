@@ -2,6 +2,12 @@ h3 {
     cursor: pointer;
 }
 
+.profiles-gate-container {
+    display: grid;
+    place-content: center;
+    min-height: 100vh;
+}
+
 .profiles-gate-container li.profile {
     width: 10vw;
     max-width: 200px;
@@ -34,6 +40,7 @@ h3 {
     -o-background-size: cover;
     background-size: cover;
     background-color: #333;
+    overflow: hidden;
 }
 
 .profiles-gate-container .profile-name {
@@ -42,7 +49,7 @@ h3 {
     color: grey;
     display: block;
     text-align: center;
-    font-size: 1.3vw;
+    font-size: 1rem;
     margin: .8em 0;
     -o-text-overflow: ellipsis;
     text-overflow: ellipsis;
@@ -66,7 +73,13 @@ h3 {
 
 .profile-gate-label {
     font-size: 36px;
-    margin: 100px 0 30px;
+    margin: 50px 0;
+}
+
+.main-header {
+    height: 68px;
+    background: transparent;
+    background-image: linear-gradient(180deg, rgba(0, 0, 0, .7) 10%, transparent);
 }
 
 .ct:hover span {
@@ -82,6 +95,7 @@ h3 {
 .profile-icon img {
     width: 100%;
     float: left;
+    transition-duration: .5s;
 }
 
 .mastfoot {
@@ -92,21 +106,8 @@ ul {
     padding: 0
 }
 
-.masthead {
-    margin: -100px 30px 0;
-}
-
 .choose-profile {
     margin: 0 50px;
-}
-
-@media only screen and (min-width: 100px) and (max-width: 400px) {
-
-
-    .profile-gate-label {
-        font-size: 36px;
-        margin: 30px 0 30px;
-    }
 }
 
 @media only screen and (min-width: 100px) and (max-width: 900px) {
@@ -117,14 +118,6 @@ ul {
     .choose-profile {
         margin: 0
     }
-
-    .inner {
-        padding: 0
-    }
-
-    .profiles-gate-container .profile-name {
-        font-size: 6.3vw
-    }
 }
 
 .modal-body label {
@@ -133,4 +126,15 @@ ul {
 
 .error {
     color: red;
+}
+
+.profile-link {
+    border: none;
+    background: none;
+
+    &:hover img {
+        width: 120%;
+        margin-top: -10%;
+        margin-left: -10%;
+    }
 }

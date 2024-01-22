@@ -5,7 +5,7 @@ export type Book = {
     publishedBy?: string;
     picture?: string;
     title?: string;
-    url?: string;
+    url: string;
     averageX?: number;
     average?: number;
     hasit?: string;

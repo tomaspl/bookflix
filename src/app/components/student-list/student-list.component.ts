@@ -1,6 +1,6 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, map } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Student } from 'src/app/shared/models/Student';
 import { StudentService } from 'src/app/shared/services/student.service';
 
@@ -25,7 +25,7 @@ export class StudentListComponent {
 
   selectStudent(student: Student): void {
     this.studentService.setCurrentStudent(student)
-    this.router.navigate(['/home', 'students', student.key])
+    this.router.navigate(['students', student.key])
   }
 
   updateData(student: Student) {

@@ -22,6 +22,5 @@ export class StarsRatingComponent {
   calculateFilledStars() {
     this.filledStars = Math.floor(this.rating);
     this.filledLastStarPercentage = (this.rating % 1) * 100;
-    console.log({ filledStars: this.filledStars, filledLastStarPercentage: this.filledLastStarPercentage })
   }
 }

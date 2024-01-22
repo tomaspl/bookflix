@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase, AngularFireList } from '@angular/fire/compat/database';
+import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { Book } from '../models/Book';
-import { Observable, Subject, map, of, switchMap } from 'rxjs';
+import { BehaviorSubject, Observable, map } from 'rxjs';
 import { Comment } from '../models/Comment';
+import { StudentService } from './student.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,39 +12,51 @@ export class BookService {
   value!: number;
   total!: number;
   average!: number;
-  private searchBook = new Subject<string>();
-  public searchBook$ = this.searchBook.asObservable();
 
-  constructor(private db: AngularFireDatabase) { }
-  findAllBooks(): AngularFireList<Book> {
-    return this.db.list('/books');
+  private allBooksSubject = new BehaviorSubject<Book[]>([]);
+  private allBooks$: Observable<Book[]> = this.allBooksSubject.asObservable();
+
+  private bookKeyWords = new BehaviorSubject<string>('');
+  private bookKeyWords$: Observable<string> = this.bookKeyWords.asObservable();
+
+  constructor(private db: AngularFireDatabase, private studentService: StudentService) {
+    this.db.list('/books').snapshotChanges().pipe(
+      map(changes => changes.map(c => ({ ...c.payload.val() as Book })))
+    ).subscribe(books => {
+      this.allBooksSubject.next(books);
+    });
   }
-
-
-  findActiveSearchBook() {
-    return this.searchBook$;
-  }
-  /**
-   * 
-          query: {
-            orderByChild: "url",
-            equalTo: url
-          }
+  getBooksFromDB(keyword?: string): Observable<Book[]> {
+    return this.allBooks$.pipe(
+      map(books => {
+        if (keyword) {
+          const lowerCaseKeyword = keyword.toLowerCase();
+          return books.filter(book =>
+            book.title?.toLowerCase().includes(lowerCaseKeyword) ||
+            book.author?.toLowerCase().includes(lowerCaseKeyword)
+          );
         }
-   */
+        return books;
+      })
+    );
+  }
+
+  setNewBookKeyWords(value: string) {
+    this.bookKeyWords.next(value)
+  }
+
+  getNewBookKeyWords(): Observable<string> {
+    return this.bookKeyWords$
+  }
+
   findBookByUrl(url: string): Observable<any> {
-    console.log('url', url)
     return this.db.object('/books/' + url).valueChanges();
-
-    //return this.db.list("/books", ref => ref.orderByChild('url').equalTo(url))
   }
 
-  findBookByCalif(bookKey: string | undefined, studentKey: string) {
-    return this.db.object(bookKey + "/" + studentKey).valueChanges();
+  findBookByCalif(bookKey: string | undefined, studentKey: string): Observable<string> {
+    return this.db.object(bookKey + "/" + studentKey).valueChanges() as Observable<string>;
 
   }
-
-  searchBook2(value: string) { }
 
   saveBookAverage(
     alumnoId: string,
@@ -55,14 +68,9 @@ export class BookService {
     this.average = 0;
     const tutRef = this.db.object(`${libroId}/${alumnoId}`);
     return tutRef.set(calif);
-
-    // return this.db.list(libroId + "/" + alumnoId).push(dataToSave)
-    // return this.firebaseUpdate(dataToSave);
   }
 
   updateAverages(libroId: any) {
-    var valor = 0;
-
     this.db.list(libroId).snapshotChanges().pipe(map(changes =>
       changes.map(c => {
         return c.payload.val()
@@ -72,65 +80,35 @@ export class BookService {
       this.average = 0;
       const sum = response.reduce((total: number, currentNumber: number) => total + currentNumber, 0);
       this.average = sum / response.length;
-      const tutRef = this.db.object("books/" + libroId);
-      tutRef.update({ average: this.average })
-      const tutRef2 = this.db.object("books/" + libroId);
-      tutRef2.update({ averageX: this.average * 20 })
-      /*for (let i = 0; i < response.length; i++) {
-        setTimeout(() => {
-          var total = response.length;
-          valor += response[i].$value;
-          console.log('response[i]', response[i].val())
-          this.average = valor / total;
-          var tempo = this.average;
-          console.log('tempo', tempo)
-          if (i + 1 == response.length) {
-            let dataToSave: any = {};
-            dataToSave["books/" + libroId + "/average"] = tempo;
-            dataToSave["books/" + libroId + "/averageX"] = tempo * 20;
-            const tutRef = this.db.object("books/" + libroId);
-            tutRef.update({ average: tempo })
-            const tutRef2 = this.db.object("books/" + libroId);
-            tutRef2.update({ averageX: tempo * 20 })
-          }
-        }, 700);
-      }*/
+      const bookRef = this.db.object("books/" + libroId);
+      bookRef.update({ average: this.average, averageX: this.average * 20 })
     })
 
   }
 
-  retirar(bookId: string | undefined, studentId: string | null) {
+  retirar(bookId: string | undefined) {
     const tutRef = this.db.object("books/" + bookId);
-    tutRef.update({ hasit: studentId })
+    tutRef.update({ hasit: this.studentService.currentStudent.key })
   }
 
   addToFiles(bookKey: string | undefined, idAlumno: string | null) {
     const date = new Date();
     const fichaToSave = { idAlumno, timestamp: date.getTime() };
-    /*const newFichaKey = this.db.database.child("files/" + bookKey + "/").push()
-      .key;
-
-    let envioFicha = {};
-
-    envioFicha["fi/" + bookKey + "/list/" + newFichaKey] = fichaToSave;
-
-    this.firebaseUpdate(envioFicha);*/
     this.db.list('/files' + bookKey + '/list').push(fichaToSave);
 
   }
 
   getBookComments(bookId: string): Observable<Comment[]> {
-    console.log('bookId', bookId)
     return this.db
       .list("commentsByBook/" + bookId + "/").snapshotChanges().pipe(
         map(changes => changes.map(c => ({ id: c.key, ...c.payload.val() as Object } as Comment))));
   }
 
-  checkoutBook(bookKey: string | undefined, studentId: string | null, bookTitle: string | undefined, bookPicture: string | undefined) {
+  checkoutBook(bookKey: string | undefined, bookTitle: string | undefined, bookPicture: string | undefined) {
     if (bookKey) {
       const data = { [bookKey]: { returned: false, bookTitle, bookPicture } }
-      const tutRef2 = this.db.object(`${studentId}`);
-      tutRef2.update(data)
+      const bookRef = this.db.object(`${this.studentService.currentStudent.key}`);
+      bookRef.update(data)
     }
   }
 
@@ -139,14 +117,12 @@ export class BookService {
     bookKey: string | undefined,
     bookTitle: string | undefined
   ) {
-    console.log('comment', comment)
     const commentToSave = {
       ...comment,
       bookTitle,
       bookKey,
       time: new Date().getTime(),
     };
-    //console.log('commentsByBook', commentToSave)
     this.db.list('commentsByBook/' + bookKey).push(commentToSave);
   }
 
@@ -157,27 +133,20 @@ export class BookService {
 
   addToCurrentState(
     bookKey: string | undefined,
-    studentId: string | null,
-    firstName: string | undefined,
-    lastName: string | undefined,
     bookTitle: string | undefined,
     bookPicture: string | undefined
   ) {
     const date = new Date();
+    const student = this.studentService.currentStudent;
     const newEstado = {
-      studentId,
-      nya: firstName + " " + lastName,
+      studentId: student.key,
+      nya: student.firstName + " " + student.lastName,
       bookKey,
       bookTitle,
       bookPicture,
       dateOfRent: date.getTime(),
       dateOfReturn: this.addDaysToTime(7, date.getTime())
     };
-
-
-
     this.db.list('state').push(newEstado);
-
   }
-
 }

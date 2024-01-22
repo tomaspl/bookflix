@@ -46,7 +46,7 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 ## Upload to Firebase
 
 ```sh
-$ ng build --prod
+$ ng build
 $ sudo firebase login
 $ sudo firebase init
 ```

@@ -40,7 +40,7 @@ export class StudentService {
   }
 
 
-  retirar(bookId: string) {
+  takeBook(bookId: string) {
     const tutRef = this.db.object("students/" + this.currentStudent.key);
     this.currentStudent.bookId = bookId;
     tutRef.update({ bookId: bookId })

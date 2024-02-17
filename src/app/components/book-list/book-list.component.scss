@@ -1,118 +1,64 @@
-h3 {
-    cursor: pointer;
-}
-
-.slider {
-    position: relative;
-    margin: 0;
-    padding: 0 4%;
-}
-
-
-.slider .sliderMask.showPeek {
-    overflow-x: visible;
-}
-
-.slider .sliderMask .sliderContent .slider-item {
-    z-index: 1;
-    display: inline-block;
-    position: relative;
-    white-space: normal;
-    vertical-align: top;
-}
-
-.lockup {
-    position: relative;
-}
-
-.cover-container {
-    width: 100%;
-}
-
-.portada1 {
-    background: url(https://firebasestorage.googleapis.com/v0/b/bookflix-4230d.appspot.com/o/portada.png?alt=media&token=e752e171-a069-4816-a557-2c043b5acfdb) no-repeat;
+.cover1 {
+    background: url('../../../assets/covers/1.png') no-repeat;
     background-size: cover;
     background-position-y: center;
 }
 
-.portada1-sub {
+.cover2 {
+    background: url('../../../assets/covers/2.jpg') no-repeat;
+    background-size: cover;
+    background-position-y: center;
+}
+
+.cover3 {
+    background: url('../../../assets/covers/3.jpeg') no-repeat;
+    background-size: cover;
+    background-position-y: center;
+}
+
+.cover-sub {
     background-size: cover;
     background-position-y: 0px;
     background-image: linear-gradient(180deg, rgba(20, 20, 20, 1) 10%, transparent);
 }
 
-.destacado {
+.highlighted {
     width: 350px;
     text-align: left;
     margin-left: 60px;
     margin-right: 60px;
-}
 
-.destacado p {
-    line-height: 18px;
-    font-size: 18px;
-}
-
-.destacado a {
-    opacity: 0.8;
-    float: left;
-}
-
-.destacado .white {
-    color: #fff;
-}
-
-.destacado .black {
-    color: #000;
-}
-
-#librosEncontrados {
-    margin-top: -65px;
-}
-
-@media (max-width: 768px) {
-    #librosEncontrados {
+    p {
+        line-height: 18px;
         font-size: 18px;
     }
-}
 
-@media only screen and (min-width: 100px) and (max-width: 400px) {
-    .profile-gate-label {
-        font-size: 36px;
-        margin: 30px 0 30px;
-    }
-}
-
-@media only screen and (min-width: 100px) and (max-width: 900px) {
-    .choose-profile {
-        margin: 0;
+    a {
+        opacity: 0.8;
+        float: left;
     }
 
-    .inner {
-        padding: 0;
+    .white {
+        color: #fff;
     }
 
-    .profiles-gate-container .profile-name {
-        font-size: 6.3vw;
-    }
-
-    .destacado {
-        display: none;
-    }
-
-    .portadas {
-        background: none;
+    .black {
+        color: #000;
     }
 }
 
 .available {
     position: absolute;
-    bottom: 50%;
-    z-index: 11111;
+    bottom: 0;
+    z-index: 2;
     text-align: center;
-    width: 100%;
     background: red;
     box-shadow: 0 2px 30px #000;
+    margin: 0;
+    padding: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 5px 5px 0 0;
 }
 
 .wrapper-books {
@@ -122,6 +68,18 @@ h3 {
     row-gap: 16px;
     max-width: 1200px;
     margin: 0 auto;
+}
+
+@media only screen and (max-width: 578px) {
+    .wrapper-books {
+
+        grid-template-columns: repeat(auto-fit, minmax(100%, 16%));
+    }
+
+}
+
+.img-wrapper {
+    position: relative;
 }
 
 .slider-item {
@@ -137,4 +95,12 @@ h3 {
 .book-title {
     height: 45px;
     line-height: 14px;
+}
+
+@media only screen and (min-width: 100px) and (max-width: 900px) {
+
+    .highlighted,
+    .covers {
+        display: none;
+    }
 }

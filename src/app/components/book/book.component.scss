@@ -1,23 +1,9 @@
-.col-sm-8 p {
-    text-align: left
-}
+.col-sm-8 {
 
-.col-sm-8 h3 {
-    text-align: left
-}
-
-#form {
-    width: 250px;
-    margin: 0 auto;
-    height: 50px;
-}
-
-#form p {
-    text-align: center;
-}
-
-#form label {
-    font-size: 20px;
+    p,
+    h3 {
+        text-align: left
+    }
 }
 
 input[type="radio"] {
@@ -29,7 +15,7 @@ label {
     font-size: 30px;
 }
 
-.clasificacion {
+.rating {
     direction: rtl;
     unicode-bidi: bidi-override;
 }
@@ -43,21 +29,9 @@ input[type="radio"]:checked~label {
     color: orange;
 }
 
-h3 {
-    cursor: pointer;
-}
-
-img.fotoLibro {
+img.pictureBook {
     float: left;
     width: 100%;
-}
-
-.modal-body h4 {
-    color: #000;
-}
-
-.masthead-brand {
-    margin-left: 30px;
 }
 
 .content-list-book {
@@ -69,4 +43,9 @@ img.fotoLibro {
     float: left;
     background-repeat: no-repeat;
     background-position-y: -200px;
+    overflow: hidden;
+}
+
+textarea.form-control {
+    border-radius: 0;
 }

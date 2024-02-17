@@ -1,25 +1,45 @@
-h3 {
-    cursor: pointer;
-}
-
 .profiles-gate-container {
     display: grid;
     place-content: center;
     min-height: 100vh;
-}
 
-.profiles-gate-container li.profile {
-    width: 10vw;
-    max-width: 200px;
-    min-width: 84px;
-    margin: 0 2vw 0 0;
-    display: inline-block;
-    vertical-align: top;
-    position: relative;
-}
+    li.profile {
+        width: 10vw;
+        max-width: 200px;
+        min-width: 84px;
+        margin: 0 2vw 0 0;
+        display: inline-block;
+        vertical-align: top;
+        position: relative;
 
-.list-profiles .avatar-wrapper {
-    position: relative
+        &:not(:last-child) {
+            margin: 0 2vw 0 0;
+        }
+    }
+
+    li a.focused .profile-icon,
+    li a.hover span,
+    li a:focus .profile-icon,
+    li a:hover .profile-icon {
+        border-color: #e5e5e5;
+        cursor: pointer;
+        color: #e5e5e5;
+        text-decoration: none;
+    }
+
+    .profile-name {
+        line-height: 1.2em;
+        min-height: 2.4em;
+        color: grey;
+        display: block;
+        text-align: center;
+        font-size: 1rem;
+        margin: .8em 0;
+        -o-text-overflow: ellipsis;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        text-decoration: none;
+    }
 }
 
 .profile-icon {
@@ -41,39 +61,12 @@ h3 {
     background-size: cover;
     background-color: #333;
     overflow: hidden;
-}
 
-.profiles-gate-container .profile-name {
-    line-height: 1.2em;
-    min-height: 2.4em;
-    color: grey;
-    display: block;
-    text-align: center;
-    font-size: 1rem;
-    margin: .8em 0;
-    -o-text-overflow: ellipsis;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    text-decoration: none;
-}
-
-.profiles-gate-container li.profile:not(:last-child) {
-    margin: 0 2vw 0 0;
-}
-
-.profiles-gate-container li a.focused .profile-icon,
-.profiles-gate-container li a.hover span,
-.profiles-gate-container li a:focus .profile-icon,
-.profiles-gate-container li a:hover .profile-icon {
-    border-color: #e5e5e5;
-    cursor: pointer;
-    color: #e5e5e5;
-    text-decoration: none;
-}
-
-.profile-gate-label {
-    font-size: 36px;
-    margin: 50px 0;
+    img {
+        width: 100%;
+        float: left;
+        transition-duration: .5s;
+    }
 }
 
 .main-header {
@@ -82,50 +75,14 @@ h3 {
     background-image: linear-gradient(180deg, rgba(0, 0, 0, .7) 10%, transparent);
 }
 
-.ct:hover span {
-    color: #fff;
-    text-decoration: none;
-}
-
+.ct:hover span,
 .ct:hover a {
     color: #fff;
     text-decoration: none;
 }
 
-.profile-icon img {
-    width: 100%;
-    float: left;
-    transition-duration: .5s;
-}
-
-.mastfoot {
-    position: relative;
-}
-
-ul {
-    padding: 0
-}
-
 .choose-profile {
     margin: 0 50px;
-}
-
-@media only screen and (min-width: 100px) and (max-width: 900px) {
-    .masthead {
-        margin: 0 30px;
-    }
-
-    .choose-profile {
-        margin: 0
-    }
-}
-
-.modal-body label {
-    color: #000;
-}
-
-.error {
-    color: red;
 }
 
 .profile-link {
@@ -137,4 +94,15 @@ ul {
         margin-top: -10%;
         margin-left: -10%;
     }
+}
+
+@media only screen and (min-width: 100px) and (max-width: 900px) {
+    .choose-profile {
+        margin: 0
+    }
+}
+
+.profile-gate-label {
+    font-size: 36px;
+    margin: 50px 0;
 }

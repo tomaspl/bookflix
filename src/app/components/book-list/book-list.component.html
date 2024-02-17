@@ -1,7 +1,7 @@
 <div class="position-relative overflow-hidden text-center">
-    <div class="portada1">
-        <div class="portada1-sub">
-            <div class="destacado mt-n5 pt-5 pb-4 mb-4">
+    <div [ngClass]="'cover'+randomCover">
+        <div class="cover-sub">
+            <div class="highlighted mt-n5 pt-5 pb-4 mb-4">
                 <h1 class="font-white mt-5 pt-5">Virtual library for classroom</h1>
                 <p class="font-white mb-5">
                     With this platform you will be able to see what books are available to read, reserve them, comment
@@ -22,10 +22,12 @@
         </h2>
         <div class="wrapper-books">
             <div [routerLink]="[book.url]" class="slider-item" *ngFor="let book of (bookList$ | async)">
-                <img [src]="book.picture" alt="{{book.title}}" />
-                <p *ngIf="book.hasit" class="available">
-                    book rented
-                </p>
+                <div class="img-wrapper">
+                    <img [src]="book.picture" alt="{{book.title}}" />
+                    <p *ngIf="book.hasit" class="available">
+                        Rented
+                    </p>
+                </div>
                 <div class="py-2">
                     <app-stars-rating [rating]="book.average??0"></app-stars-rating>
                 </div>

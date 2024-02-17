@@ -13,8 +13,12 @@ export class BookListComponent {
   public activeSearchBook!: boolean;
   public subscActiveSearch!: Observable<String>;
   public bookList$!: Observable<Book[]>;
+  public randomCover: number;
 
-  constructor(private bookService: BookService) { }
+  constructor(private bookService: BookService) {
+    this.randomCover = Math.floor(Math.random() * 3) + 1;
+
+  }
 
   ngOnInit() {
     this.activeSearchBook = false;

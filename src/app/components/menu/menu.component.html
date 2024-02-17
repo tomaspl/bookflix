@@ -1,27 +1,28 @@
-<div id="content-list-book" class="portadas">
+<div class="portadas">
     <nav class="site-header navbar navbar-expand-md navbar-dark fixed-top">
-        <a><img alt="" src="assets/logo.png" /></a>
+        <a [routerLink]="inUserHome ? null : '/students/'+(student$|async)?.key"><img alt=""
+                src="assets/logo.png" /></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
             aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active2" *ngIf="(student$ | async) as studentData">
+                <li class="nav-item active" *ngIf="(student$ | async) as studentData">
                     <ng-container *ngIf="studentData.img && !esMaestra">
                         <img src="/assets/{{ studentData.img }}.png" width="30px" />
                     </ng-container>
                 </li>
                 <li *ngIf="!esMaestra" class="nav-item">
-                    <a class="nav-link active2">Hi {{ (student$|async)?.firstName }}</a>
+                    <a class="nav-link active">Hi {{ (student$|async)?.firstName }}</a>
                 </li>
                 <li class="nav-item"><a class="nav-link" href="../">Home</a></li>
                 <li *ngIf="!book && !esMaestra" class="nav-item">
-                    <a class="nav-link active">Books</a>
+                    <a class="nav-link active underlined">Books</a>
                 </li>
 
             </ul>
-            <input *ngIf="showSearch" id="search" (keyup)="keyUp($event)" placeholder="Search..." type="text" />
+            <input *ngIf="showSearch" class="search" (keyup)="keyUp($event)" placeholder="Search..." type="text" />
         </div>
     </nav>
     <router-outlet name="content"></router-outlet>

@@ -16,6 +16,7 @@ export class MenuComponent implements OnInit {
   alreadyRead!: Boolean;
   esMaestra!: Boolean;
   showSearch!: Boolean
+  inUserHome!: Boolean
   relPathFichero = '';
   relPathPrestamos = '';
   adminurl = '';
@@ -27,8 +28,9 @@ export class MenuComponent implements OnInit {
 
   }
   ngOnInit() {
-    const splittedURL = this.router.routerState.snapshot.url.split('/');
     this.showSearch = !this.route.firstChild?.snapshot.params['book'];
+
+    this.inUserHome = this.route.firstChild?.component?.name === 'BookListComponent';
     this.student$ = this.studentService.getCurrentStudent();
   }
 

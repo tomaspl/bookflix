@@ -86,7 +86,7 @@ export class BookService {
 
   }
 
-  retirar(bookId: string | undefined) {
+  takeBook(bookId: string | undefined) {
     const tutRef = this.db.object("books/" + bookId);
     tutRef.update({ hasit: this.studentService.currentStudent.key })
   }

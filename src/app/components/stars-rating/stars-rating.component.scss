@@ -1,3 +1,8 @@
+.star-container {
+    width: 80%;
+    margin: 0 auto;
+}
+
 .star-wrapper {
     display: inline-block;
     padding: 1px;
@@ -5,7 +10,7 @@
 }
 
 .star {
-    width: 15%;
+    width: 20%;
     height: 15%;
     fill: gold;
 }
@@ -15,7 +20,7 @@
 }
 
 .empty-star {
-    width: 15%;
+    width: 20%;
     height: 15%;
 }
 

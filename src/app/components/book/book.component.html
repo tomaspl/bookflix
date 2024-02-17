@@ -1,88 +1,80 @@
 <div *ngIf="book" class="content-list-book mt-5">
-  <h2 class="my-3">{{ book.title }}</h2>
-  <div class="w-100 float-start">
-    <div class="row m-0">
-      <div class="col-sm-5"></div>
-      <div class="col-sm-2">
-        <app-stars-rating [rating]="book.average??0"></app-stars-rating>
-      </div>
+  <h2 class="my-3 text-center">{{ book.title }}</h2>
+  <div class="row justify-content-center">
+    <div class="col-sm-2">
+      <app-stars-rating [rating]="book.average??0"></app-stars-rating>
     </div>
   </div>
-  <div class="container">
-    <div class="w-100 float-start">
-      <div class="row m-0">
-        <div class="col-sm-4">
-          <img class="fotoLibro" [src]="book.picture" />
-          <div class="mb-2 mt-2 w-100 float-left" *ngIf="book?.youtubeLink">
-            <button data-toggle="modal" data-target="#videoModal" class="btn btn-danger m-auto" (click)="showVideo()">
-              Watch BookTriller
-              <i class="bi bi-play-btn-fill"></i>
-            </button>
-          </div>
+  <div class="container mt-3">
+    <div class="row">
+      <div class="col-sm-4">
+        <img class="pictureBook" [src]="book.picture" />
+        <div class="mb-2 mt-2 w-100 float-left" *ngIf="book?.youtubeLink">
+          <button data-toggle="modal" data-target="#videoModal" class="btn btn-danger mt-2 w-100" (click)="showVideo()">
+            Watch BookTriller
+            <i class="bi bi-play-btn-fill"></i>
+          </button>
         </div>
-        <div class="col-sm-8">
-          <ng-container *ngIf="book.description">
-            <h3>Description</h3>
-            <p>{{ book.description }}</p>
-          </ng-container>
-          <ng-container *ngIf="book.illustrator">
-            <h3>Author</h3>
-            <p>{{ book.author}}</p>
-          </ng-container>
-          <ng-container *ngIf="book.illustrator">
-            <h3>Ilustrador</h3>
-            <p>{{ book.illustrator}}</p>
-          </ng-container>
-          <ng-container *ngIf="book.publishedBy">
-            <h3>Published by</h3>
-            <p>{{ book.publishedBy}}</p>
-          </ng-container>
-          <h3>My vote</h3>
-          <p class="clasificacion mb-0">
-            <input id="radio1" type="radio" name="estrellas" [checked]="(currentStars$ | async) == '5'" />
-            <label for="radio1" (click)="
+      </div>
+      <div class="col-sm-8">
+        <ng-container *ngIf="book.description">
+          <h3>Description</h3>
+          <p>{{ book.description }}</p>
+        </ng-container>
+        <ng-container *ngIf="book.illustrator">
+          <h3>Author</h3>
+          <p>{{ book.author}}</p>
+        </ng-container>
+        <ng-container *ngIf="book.illustrator">
+          <h3>Ilustrador</h3>
+          <p>{{ book.illustrator}}</p>
+        </ng-container>
+        <ng-container *ngIf="book.publishedBy">
+          <h3>Published by</h3>
+          <p>{{ book.publishedBy}}</p>
+        </ng-container>
+        <h3>My vote</h3>
+        <p class="rating mb-0">
+          <input id="radio1" type="radio" name="estrellas" [checked]="(currentStars$ | async) == '5'" />
+          <label for="radio1" (click)="
                   saveRating(5, book.url)
                 ">★</label>
-            <input id="radio2" type="radio" name="estrellas" [checked]="(currentStars$ | async) == '4'" />
-            <label for="radio2" (click)="
+          <input id="radio2" type="radio" name="estrellas" [checked]="(currentStars$ | async) == '4'" />
+          <label for="radio2" (click)="
                   saveRating(4, book.url)
                 ">★</label>
-            <input id="radio3" type="radio" name="estrellas" [checked]="(currentStars$ | async) == '3'" />
-            <label for="radio3" (click)="
+          <input id="radio3" type="radio" name="estrellas" [checked]="(currentStars$ | async) == '3'" />
+          <label for="radio3" (click)="
                   saveRating(3, book.url)
                 ">★</label>
-            <input id="radio4" type="radio" name="estrellas" [checked]="(currentStars$ | async) == '2'" />
-            <label for="radio4" (click)="
+          <input id="radio4" type="radio" name="estrellas" [checked]="(currentStars$ | async) == '2'" />
+          <label for="radio4" (click)="
                   saveRating(2, book.url)
                 ">★</label>
-            <input id="radio5" type="radio" name="estrellas" [checked]="(currentStars$ | async) == '1'" />
-            <label for="radio5" (click)="
+          <input id="radio5" type="radio" name="estrellas" [checked]="(currentStars$ | async) == '1'" />
+          <label for="radio5" (click)="
                   saveRating(1, book.url)
                 ">★</label>
-          </p>
-          <div class="w-100 mb-4 float-left">
-            <button data-bs-toggle="modal" type="button" data-bs-target="#exampleModal"
-              class="btn btn-danger float-left">
-              Check out
-            </button>
-
-          </div>
-          <h3>Comments</h3>
-          <form [formGroup]="form" autocomplete="off" class="lesson-form">
-            <fieldset>
-              <input type="hidden" name="student" formControlName="student"
-                [value]="(student$ | async)?.firstName + ' ' + (student$ | async)?.lastName" />
-              <input type="hidden" name="img" formControlName="img" [value]="(student$ | async)?.img" />
-              <textarea class="form-control" name="comment" formControlName="comment" cols="30" rows="5"></textarea>
-              <button [disabled]="!form.valid" (click)="saveComment()" class="btn btn-danger w-100"
-                style="margin: 10px auto; display: block; float:none;">
-                Send
-              </button>
-            </fieldset>
-          </form>
-
-          <app-comments-list [bookKey]="book.url"></app-comments-list>
+        </p>
+        <div class="mb-4">
+          <button data-bs-toggle="modal" type="button" data-bs-target="#exampleModal" class="btn btn-danger">
+            Check out
+          </button>
         </div>
+        <h3>Write a comment</h3>
+        <form [formGroup]="form" autocomplete="off" class="comment-form">
+          <fieldset>
+            <input type="hidden" name="student" formControlName="student"
+              [value]="(student$ | async)?.firstName + ' ' + (student$ | async)?.lastName" />
+            <input type="hidden" name="img" formControlName="img" [value]="(student$ | async)?.img" />
+            <textarea class="form-control" name="comment" formControlName="comment" cols="30" rows="5"></textarea>
+            <button [disabled]="!form.valid" (click)="saveComment()" class="btn btn-danger mt-2">
+              Send
+            </button>
+          </fieldset>
+        </form>
+
+        <app-comments-list [bookKey]="book.url"></app-comments-list>
       </div>
     </div>
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -111,7 +103,7 @@
               Close
             </button>
             <button type="button" (click)="
-                retirar(
+                takeBook(
                   book.url,
                   book.title,
                   book.picture

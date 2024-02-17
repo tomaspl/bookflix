@@ -95,11 +95,11 @@ export class BookComponent implements OnInit, OnDestroy {
     });
   }
 
-  retirar(bookKey: string, bookTitle: string | undefined, bookFoto: string | undefined) {
+  takeBook(bookKey: string, bookTitle: string | undefined, bookFoto: string | undefined) {
     this.bookService.addToCurrentState(bookKey, bookTitle, bookFoto);
     this.bookService.checkoutBook(bookKey, bookTitle, bookFoto);
-    this.bookService.retirar(bookKey);
-    this.studentService.retirar(bookKey);
+    this.bookService.takeBook(bookKey);
+    this.studentService.takeBook(bookKey);
   }
 
   hideVideo() {

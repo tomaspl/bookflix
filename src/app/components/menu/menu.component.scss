@@ -1,4 +1,4 @@
-#search {
+.search {
     background: none;
     color: hsla(0, 0%, 100%, 0.75);
     font-weight: 700;
@@ -20,36 +20,39 @@ ul {
     margin-right: 20px !important;
 }
 
-.navbar-nav .nav-link {
-    font-weight: 400;
-    font-family: Netflix Sans, Helvetica Neue, Helvetica, Arial, sans-serif;
-    font-size: 16px;
-    color: hsla(0, 0%, 100%, 0.75);
-    border-bottom: 2px solid transparent;
-}
+.navbar-nav {
+    .nav-link {
+        font-weight: 400;
+        font-family: Netflix Sans, Helvetica Neue, Helvetica, Arial, sans-serif;
+        font-size: 16px;
+        color: hsla(0, 0%, 100%, 0.75);
+        border-bottom: 2px solid transparent;
+    }
 
-.navbar-nav .active {
-    color: #fff;
-    border-bottom: 2px solid #fff
-}
+    .active {
+        color: #fff;
+    }
 
-.navbar-nav .active2 {
-    color: #fff;
+    .active.underlined {
+        border-bottom: 2px solid #fff
+    }
 }
 
 .navbar a img {
     width: 60%;
+    margin: 0 auto;
+    display: block;
 }
 
 @media (max-width: 768px) {
-    .navbar a img {
-        float: left;
-        margin-top: 0;
-
-    }
-
     .navbar {
         background-color: #0a0a0a;
+
+        a img {
+            float: left;
+            margin-top: 0;
+
+        }
     }
 
     .navbar-collapse {
@@ -60,6 +63,6 @@ ul {
     }
 }
 
-#navbarCollapse li img {
+.navbar-collapse li img {
     margin: 5px
 }

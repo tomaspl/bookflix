@@ -28,10 +28,17 @@ Currently, the project is undergoing migration to a more modern Angular version,
 - [X] **Comments module on the book page**
 - [X] **Search book functionality**
 - [X] **Style adjustments on the students list page**
+- [X] **Style removal of deatch code**
+- [X] **Font family update**
+- [X] **Favicon**
 - [ ] **Style adjustments on the books list and book detail pages**
 - [ ] **Admin page to mark the books returned by students**
 - [ ] **Refactoring**
 - [ ] **Typings reviews**
+- [ ] **Mobile support**
+- [ ] **I18N**
+- [ ] **Cover design improvement**
+- [ ] **Img placeholder while loading**
 
 
 ## Development server

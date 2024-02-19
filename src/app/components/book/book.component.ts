@@ -27,6 +27,8 @@ export class BookComponent implements OnInit, OnDestroy {
   public student$!: Observable<Student>;
   public taken!: boolean;
   public video!: boolean;
+  public wasRead!: boolean;
+  public studentId!: string;
 
   private subscriptionStudent!: Subscription;
 
@@ -53,8 +55,11 @@ export class BookComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     window.scrollTo(0, 0);
+    /*this.studentId = this.route.firstChild?.snapshot.params['id'];
+    console.log('this.studentId', this.studentId)*/
     this.fetchBook();
     this.fetchRate();
+    this.readByUser();
   }
 
   ngOnDestroy() {
@@ -113,5 +118,12 @@ export class BookComponent implements OnInit, OnDestroy {
   saveComment() {
     this.bookService.createNewComment(this.form.value, this.book.url, this.book.title);
     this.reset();
+  }
+
+  async readByUser() {
+    const params = await this.route.snapshot.params;
+    const bookUrl = params['book'];
+    this.studentId = params['id'];
+    this.wasRead = await this.studentService.bookReadByStudent(bookUrl);
   }
 }

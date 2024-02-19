@@ -17,7 +17,10 @@ export class StudentService {
     if (params) {
       const studentId = params['id'];
       this.db.object("students/" + studentId).valueChanges().subscribe((response: any) => {
+
         const myStudent: Student = ({ key: studentId, ...response } as Student)
+        console.log('myStudent', myStudent);
+
         this.setCurrentStudent(myStudent)
         this.currentStudentSub.next(myStudent)
       });
@@ -45,4 +48,19 @@ export class StudentService {
     this.currentStudent.bookId = bookId;
     tutRef.update({ bookId: bookId })
   }
+
+  bookReadByStudent(bookId: string): Promise<boolean> {
+    const studentId = this.route.firstChild?.snapshot.params['id'];
+    return new Promise((resolve, reject) => {
+      this.db.list(studentId).snapshotChanges().subscribe(changes => {
+        const presente = changes.some(change => change.key === bookId);
+        resolve(presente);
+      }, error => {
+        reject(error);
+      });
+    });
+
+
+  }
+
 }

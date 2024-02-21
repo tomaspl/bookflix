@@ -21,20 +21,22 @@
             </ng-container>
         </h2>
         <div class="wrapper-books">
-            <div [routerLink]="[book.url]" class="slider-item" *ngFor="let book of (bookList$ | async)">
-                <div class="img-wrapper">
-                    <img [src]="book.picture" alt="{{book.title}}" />
-                    <p *ngIf="book.hasit" class="available">
-                        Rented
+            <ng-container *ngFor="let book of (bookList$ | async)">
+                <div [routerLink]="[book.url]" routerLinkActive="router-link-active" class="slider-item">
+                    <div class="img-wrapper">
+                        <img [src]="book.picture" alt="{{book.title}}" />
+                        <p *ngIf="book.hasit" class="available">
+                            Rented
+                        </p>
+                    </div>
+                    <div class="py-2">
+                        <app-stars-rating [rating]="book.average??0"></app-stars-rating>
+                    </div>
+                    <p class="w-100 float-left font-weight-bold" class="bookTitle">
+                        {{ book.title }}
                     </p>
                 </div>
-                <div class="py-2">
-                    <app-stars-rating [rating]="book.average??0"></app-stars-rating>
-                </div>
-                <p class="w-100 float-left font-weight-bold" class="bookTitle">
-                    {{ book.title }}
-                </p>
-            </div>
+            </ng-container>
         </div>
     </div>
 </div>

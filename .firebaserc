@@ -1,8 +1,15 @@
 {
   "projects": {
-    "default": "dev-bookflix",
-    "dev-bookflix": "dev-bookflix"
+    "default": "dev-bookflix"
   },
-  "targets": {},
+  "targets": {
+    "dev-bookflix": {
+      "hosting": {
+        "bookflix": [
+          "bookflix-school"
+        ]
+      }
+    }
+  },
   "etags": {}
 }

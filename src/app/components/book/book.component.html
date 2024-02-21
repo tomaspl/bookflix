@@ -33,11 +33,7 @@
           <h3>Published by</h3>
           <p>{{ book.publishedBy}}</p>
         </ng-container>
-        <ng-container>
-          hasit: {{book.hasit}}<br />
-          bookid: {{!(student$|async)?.bookId}}<br />
-        </ng-container>
-        <ng-container *ngIf="wasRead">
+        <ng-container *ngIf="wasRead && wasReturned">
           <h3>My vote</h3>
           <p class="rating mb-0">
             <input id="radio1" type="radio" name="estrellas" [checked]="(currentStars$ | async) == '5'" />
@@ -63,7 +59,7 @@
           </p>
         </ng-container>
         <div class="mb-4" *ngIf="!wasRead">
-          <button data-bs-toggle="modal" type="button" data-bs-target="#exampleModal" class="btn btn-danger">
+          <button (click)="open(content)" class="btn btn-danger">
             Check out
           </button>
         </div>
@@ -83,44 +79,41 @@
         <app-comments-list [bookKey]="book.url"></app-comments-list>
       </div>
     </div>
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <p class="text-dark" *ngIf="book?.hasit && book?.hasit!==studentId && !(student$|async)?.bookId">
-              hasit:{{book.hasit}}<br />studentId:{{studentId}}
-              You can't pick up the book because someone already has it.
-            </p>
-            <p class="text-dark" *ngIf="(student$|async)?.bookId">
-              You cannot pick up the book because you did not return the previous book
-            </p>
-            <p class="text-dark" *ngIf="!(student$|async)?.bookId && !book?.hasit">
-              ¿Está seguro de reservar el libro {{ book.title }}?
-              Are you sure about pre-ordering book {{ book.title }}?
-            </p>
-            <p class="text-dark" *ngIf="book?.hasit === (student$|async)?.key">
-              The book was successfully reserved
-            </p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-              Close
-            </button>
-            <button type="button" (click)="
+  </div>
+
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <button type="button" class="btn-close" (click)="close()" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+      <p class="text-dark" *ngIf="book?.hasit && book?.hasit!==studentId && !(student$|async)?.bookId">
+        hasit:{{book.hasit}}<br />studentId:{{studentId}}
+        You can't pick up the book because someone already has it.
+      </p>
+      <p class="text-dark" *ngIf="(student$|async)?.bookId">
+        You cannot pick up the book because you did not return the previous book
+      </p>
+      <p class="text-dark" *ngIf="!(student$|async)?.bookId && !book?.hasit">
+        ¿Está seguro de reservar el libro {{ book.title }}?
+        Are you sure about pre-ordering book {{ book.title }}?
+      </p>
+      <p class="text-dark" *ngIf="book?.hasit === (student$|async)?.key">
+        The book was successfully reserved
+      </p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="close()">
+        Close
+      </button>
+      <button type="button" (click)="
                 takeBook(
                   book.url,
                   book.title,
                   book.picture
                 )
               " *ngIf="!taken && !(student$|async)?.bookId && !book?.hasit" data-dismiss="modal"
-              class="btn btn-danger">
-              Check out
-            </button>
-          </div>
-        </div>
-      </div>
+        class="btn btn-danger">
+        Check out
+      </button>
     </div>
-  </div>
+  </ng-template>

@@ -13,6 +13,9 @@ import { BookComponent } from './components/book/book.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommentsListComponent } from './components/comments-list/comments-list.component';
 import { StarsRatingComponent } from './components/stars-rating/stars-rating.component';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { getDatabase, provideDatabase } from '@angular/fire/database';
 
 @NgModule({
   declarations: [
@@ -29,7 +32,10 @@ import { StarsRatingComponent } from './components/stars-rating/stars-rating.com
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
-    ReactiveFormsModule
+    ReactiveFormsModule/*,
+    provideFirebaseApp(() => initializeApp({ "projectId": "dev-bookflix", "appId": "1:355497591795:web:ab130f8089d821e5", "databaseURL": "https://dev-bookflix.firebaseio.com", "storageBucket": "dev-bookflix.appspot.com", "locationId": "southamerica-east1", "apiKey": "AIzaSyAGd4HjAORQ2cf-bYvdAVi-u83lP1Vv_dM", "authDomain": "dev-bookflix.firebaseapp.com", "messagingSenderId": "355497591795" })),
+    provideFirestore(() => getFirestore()),
+    provideDatabase(() => getDatabase())*/
   ],
   providers: [],
   bootstrap: [AppComponent]

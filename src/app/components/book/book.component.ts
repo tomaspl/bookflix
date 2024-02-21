@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, inject, TemplateRef } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
@@ -8,6 +8,7 @@ import { StudentService } from 'src/app/shared/services/student.service';
 import { BookService } from 'src/app/shared/services/book.service';
 import { Book } from 'src/app/shared/models/Book';
 import { Student } from 'src/app/shared/models/Student';
+import { ModalDismissReasons, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-book',
@@ -28,16 +29,20 @@ export class BookComponent implements OnInit, OnDestroy {
   public taken!: boolean;
   public video!: boolean;
   public wasRead!: boolean;
+  public wasReturned!: boolean;
   public studentId!: string;
 
   private subscriptionStudent!: Subscription;
+  private modalService = inject(NgbModal);
+  public closeResult = '';
+  modalReference: NgbModalRef;
 
   constructor(
     private route: ActivatedRoute,
     private bookService: BookService,
     private studentService: StudentService,
     private fb: FormBuilder,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
   ) {
     this.form = this.fb.group({
       comment: ['', [Validators.required]],
@@ -51,6 +56,32 @@ export class BookComponent implements OnInit, OnDestroy {
         student: student ? `${student.firstName} ${student.lastName}` : ''
       });
     });
+
+  }
+
+  open(content: TemplateRef<any>) {
+    this.modalReference = this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' });
+    this.modalReference.result.then(
+      (result) => {
+        this.closeResult = `Closed with: ${result}`;
+        console.log('this.closeResult', this.closeResult)
+      },
+      (reason) => {
+        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        console.log('this.closeResult', this.closeResult)
+      },
+    );
+  }
+
+  private getDismissReason(reason: any): string {
+    switch (reason) {
+      case ModalDismissReasons.ESC:
+        return 'by pressing ESC';
+      case ModalDismissReasons.BACKDROP_CLICK:
+        return 'by clicking on a backdrop';
+      default:
+        return `with: ${reason}`;
+    }
   }
 
   ngOnInit() {
@@ -105,6 +136,12 @@ export class BookComponent implements OnInit, OnDestroy {
     this.bookService.checkoutBook(bookKey, bookTitle, bookFoto);
     this.bookService.takeBook(bookKey);
     this.studentService.takeBook(bookKey);
+    this.modalReference.close();
+    this.readByUser();
+
+  }
+  close() {
+    this.modalReference.close();
   }
 
   hideVideo() {
@@ -125,5 +162,12 @@ export class BookComponent implements OnInit, OnDestroy {
     const bookUrl = params['book'];
     this.studentId = params['id'];
     this.wasRead = await this.studentService.bookReadByStudent(bookUrl);
+  }
+
+  async returnedByUser() {
+    const params = await this.route.snapshot.params;
+    const bookUrl = params['book'];
+    this.studentId = params['id'];
+    return !(this.studentId === this.book.hasit)
   }
 }

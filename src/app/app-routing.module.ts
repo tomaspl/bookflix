@@ -22,19 +22,14 @@ export const routes: Routes = [
         outlet: 'content',
         pathMatch: 'full'
 
+      },
+      {
+        path: ':book',
+        component: BookComponent,
+        outlet: 'content',
+        pathMatch: 'full'
       }
     ],
-    pathMatch: 'full'
-  },
-  {
-    path: 'students/:id/:book',
-    component: MenuComponent,
-    children: [{
-      path: '',
-      component: BookComponent,
-      outlet: 'content',
-      pathMatch: 'full'
-    },]
   }
 ];
 
